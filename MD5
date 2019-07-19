@@ -1,4 +1,4 @@
-1e85a283087fffe364e7c239f125677a *DESCRIPTION
+107c97ddccd0547dc087e739e20f2b57 *DESCRIPTION
 fdbeadb91f7d79ac8831853282c92674 *NAMESPACE
 fb0010dc1b1d8e791a9b08625f12e6f6 *R/create_raster.R
 540bbe2193aaef843305cb2a8f13564c *R/disclosure_risk.R
@@ -8,7 +8,8 @@ fb0010dc1b1d8e791a9b08625f12e6f6 *R/create_raster.R
 c89f0859962ed4d6908f5297653e6a44 *R/max2.R
 0032ae86d8ccd38298ebffc5b2fd4363 *R/mean.R
 1950cffe0dc18bb2dc31016e4b1b89f6 *R/plot.R
-d2659e088471bf409b5ade59b7d5432a *R/protect_quadtree.R
+85a6b4eb7a415b5e8450cd63965dbbc0 *R/protect_coarsen.R
+6c08ba1c4143de981e8131eeafaa1200 *R/protect_quadtree.R
 1e83558abfac34f278e519fbae6d6620 *R/protect_smooth.R
 cd15028e0c8918ba0ed46f4c4ca8780b *R/remove_sensitive.R
 ec014617a8d25fcdfd3b647c241177f6 *R/sdcSpatial-package.R
@@ -26,7 +27,7 @@ c9c6994d87176b2e3a296d80460b4056 *inst/doc/privacy_protecting_maps.Rmd
 f43c3125c821ad6a576f0210c0bbfa1f *inst/doc/privacy_protecting_maps.html
 fc1bd03c3687afa5ebd8f55faef9629e *man/create_raster.Rd
 9e34a67962e6cf0586fb8b2e9fa145b2 *man/disclosure_risk.Rd
-f9be7d78ed510993e888184adbe70c4c *man/dwellings.Rd
+5a73d94f7d171773ec2722a2a7b33909 *man/dwellings.Rd
 9689cef1400978062e60e74aa6a19ed0 *man/enterprises.Rd
 79ceedb0900c78fc24cdf7ad5b9f690a *man/figures/README-example-1.png
 7385afc2738a080292c7f416b00ba917 *man/figures/README-example-2.png
@@ -35,11 +36,11 @@ ca1fd22e0fa7480b3d0ed9a396aa5c56 *man/figures/README-example-3.png
 884d28bbc486bebebda28e4117656eb3 *man/figures/README-example-5.png
 afdbbffad69e3306d45e82d5413bd82d *man/figures/README-example-6.png
 7855c9bd1a80704173cafa8fbd50fc39 *man/figures/README-example-7.png
-5e63f9903991ccd277bb63e32185dfdf *man/is_sensitive.Rd
+379626d3bedaa931eb064a6da0ed1980 *man/is_sensitive.Rd
 c23fa979383458026b74c3efb3205987 *man/max2.Rd
 755e9dd983fdc53f0c788a9cdd9a51ae *man/plot.sdc_raster.Rd
 7ff7b712336b8a3b2e9b3e676a662acc *man/plot_sensitive.Rd
-95d8c251be2a9fe572af5bbccc508a08 *man/protect_quadtree.Rd
+9df2b7ed5737f71977a1256bf2a75ccc *man/protect_quadtree.Rd
 a7d6f94bd91004e0143d69eed3250c6f *man/protect_smooth.Rd
 487f756b87766872d22909742c4b4e07 *man/remove_sensitive.Rd
 f7e7489a5dc9bda2be7af795003f4eaa *man/sdcSpatial-package.Rd

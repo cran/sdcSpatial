@@ -1,6 +1,6 @@
 Package: sdcSpatial
 Title: Statistical Disclosure Control for Spatial Data
-Version: 0.1.0
+Version: 0.1.1
 Authors@R: c(
   person("Edwin", "de Jonge", email = "edwindjonge@gmail.com", role = c("aut", "cre"), 
     comment=c(ORCID="0000-0002-6580-4718")),
@@ -25,10 +25,10 @@ Imports: raster, methods
 Depends: R (>= 2.10)
 VignetteBuilder: knitr
 NeedsCompilation: no
-Packaged: 2019-07-02 20:15:10 UTC; edwin
+Packaged: 2019-07-19 17:19:20 UTC; edwin
 Author: Edwin de Jonge [aut, cre] (<https://orcid.org/0000-0002-6580-4718>),
   Peter-Paul de Wolf [aut],
   Sapphire Han [ctb]
 Maintainer: Edwin de Jonge <edwindjonge@gmail.com>
 Repository: CRAN
-Date/Publication: 2019-07-03 15:50:03 UTC
+Date/Publication: 2019-07-19 17:50:02 UTC
