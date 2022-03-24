@@ -4,8 +4,7 @@
 \alias{sensitivity_score}
 \title{Mean sensitivity for raster}
 \usage{
-sensitivity_score(x, max_risk = x$max_risk, min_count = x$min_count,
-  ...)
+sensitivity_score(x, max_risk = x$max_risk, min_count = x$min_count, ...)
 }
 \arguments{
 \item{x}{\code{\link{sdc_raster}} object.}
@@ -21,6 +20,7 @@ sensitivity_score(x, max_risk = x$max_risk, min_count = x$min_count,
 that are considered sensitive according to the used \code{\link{disclosure_risk}}
 }
 \examples{
+\donttest{
 consumption <- sdc_raster(dwellings[1:2], variable = dwellings$consumption, r = 500)
 
 sensitivity_score(consumption)
@@ -30,9 +30,14 @@ print(consumption)
 # change the rules! A higher norm generates more sensitive cells
 sensitivity_score(consumption, min_count = 20)
 }
+}
 \seealso{
-Other sensitive: \code{\link{disclosure_risk}},
-  \code{\link{is_sensitive}}, \code{\link{plot_sensitive}},
-  \code{\link{remove_sensitive}}, \code{\link{sdc_raster}}
+Other sensitive: 
+\code{\link{disclosure_risk}()},
+\code{\link{is_sensitive_at}()},
+\code{\link{is_sensitive}()},
+\code{\link{plot_sensitive}()},
+\code{\link{remove_sensitive}()},
+\code{\link{sdc_raster}()}
 }
 \concept{sensitive}

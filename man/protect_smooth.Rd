@@ -27,6 +27,7 @@ The smoother acts upon the \code{x$value$count} and \code{x$value$sum}
 from which a new \code{x$value$mean} is derived.
 }
 \examples{
+\donttest{
 library(sdcSpatial)
 library(raster)
 
@@ -57,12 +58,16 @@ cellStats(sensitive, mean)
 smoothed <- protect_smooth(production, bw = 400)
 plot(smoothed)
 
+# let's smooth to reduce the sensitivity, with higher resolution
+smoothed <- protect_smooth(production, bw = 400, smooth_fact=4, keep_resolution=FALSE)
+plot(smoothed)
+
 # what is the sensitivy fraction?
 sensitivity_score(smoothed)
 
 # let's remove the sensitive data.
 smoothed_safe <- remove_sensitive(smoothed, min_count = 3)
-plot(smoothed_safe, zlim=zlim)
+plot(smoothed_safe)
 
 # let's communicate!
 production_mean <- mean(smoothed_safe)
@@ -73,12 +78,14 @@ raster::filledContour(production_mean, nlevels = 6, main = "Mean production")
 
 
 # generated with R 3.6 >=
-#col <- hcl.colors(10, rev=TRUE)
-col <- c("#FDE333", "#BBDD38", "#6CD05E", "#00BE7D",
-         "#00A890", "#008E98",  "#007094", "#185086", "#422C70", "#4B0055")
-raster::filledContour(production_total, nlevels = 10
+#col <- hcl.colors(11, rev=TRUE)
+col <- c("#FDE333", "#C2DE34", "#7ED357", "#00C475", "#00B28A", "#009B95"
+        ,  "#008298", "#006791", "#274983", "#44286E", "#4B0055"
+        )
+raster::filledContour(production_total, nlevels = 11
              , col = col
              , main="Total production")
+}
 }
 \references{
 de Jonge, E., & de Wolf, P. P. (2016, September).
@@ -91,7 +98,8 @@ Safely Plotting Continuous Variables on a Map. In International Conference
 on Privacy in Statistical Databases (pp. 347-359). Springer, Cham.
 }
 \seealso{
-Other protection methods: \code{\link{protect_quadtree}},
-  \code{\link{remove_sensitive}}
+Other protection methods: 
+\code{\link{protect_quadtree}()},
+\code{\link{remove_sensitive}()}
 }
 \concept{protection methods}

@@ -12,13 +12,13 @@ protect_quadtree(x, max_zoom = Inf, ...)
 \item{max_zoom}{\code{numeric}, restricts the number of zoom steps and thereby the max resolution for the
 blocks. Each step will zoom with a factor of 2 in x and y so the max resolution = resolution * 2^max_zoom.}
 
-\item{...}{Arguments passed on to \code{is_sensitive}
-\describe{
-  \item{x}{\code{\link{sdc_raster}} object.}
-  \item{max_risk}{a risk value higher than \code{max_risk} will be sensitive.}
-  \item{min_count}{a count lower than \code{min_count} will be sensitive.}
-  \item{risk_type}{what kind of measure should be used (see details).}
-}}
+\item{...}{
+  Arguments passed on to \code{\link[=is_sensitive]{is_sensitive}}
+  \describe{
+    \item{\code{max_risk}}{a risk value higher than \code{max_risk} will be sensitive.}
+    \item{\code{min_count}}{a count lower than \code{min_count} will be sensitive.}
+    \item{\code{risk_type}}{what kind of measure should be used (see details).}
+  }}
 }
 \value{
 a \code{\link{sdc_raster}} object, in which sensitive cells have been recursively aggregated until not sensitive or
@@ -39,18 +39,68 @@ Currently the translation feature of the article is not (yet) implemented,
 for the original method does not take the \code{disclosure_risk} into account.
 }
 \examples{
-library(raster)
-
-fined <- sdc_raster(enterprises, enterprises$fined)
-plot(fined)
-fined_qt <- protect_quadtree(fined)
-plot(fined_qt)
-
-fined <- sdc_raster(enterprises, enterprises$fined, r=50)
-plot(fined)
-fined_qt <- protect_quadtree(fined)
-plot(fined_qt)
-
+# library(raster)
+#
+# fined <- sdc_raster(enterprises, enterprises$fined)
+# plot(fined)
+# fined_qt <- protect_quadtree(fined)
+# plot(fined_qt)
+#
+# fined <- sdc_raster(enterprises, enterprises$fined, r=50)
+# plot(fined)
+# fined_qt <- protect_quadtree(fined)
+# plot(fined_qt)
+#
+#
+#
+# library(sf)
+# gemeente_2019 <- st_read("https://cartomap.github.io/nl/rd/gemeente_2019.geojson")
+# st_crs(gemeente_2019) <- 28992
+# nbl <- st_touches(gemeente_2019)
+#
+# coords <- st_coordinates(st_centroid(gemeente_2019))
+# l <- lapply(seq_along(nbl), function(i){
+#   nb <- nbl[[i]]
+#   st_sfc(lapply(nb, function(j){
+#     st_linestring(coords[c(i,j),])})
+#   )
+# })
+# l2 <- do.call(c, l)
+#
+# edge_list <- as.data.frame(nbl)
+# library(data.table)
+# el <- as.data.table(edge_list)
+# names(el) <- c("from", "to")
+#
+# edge_list$from <- gemeente_2019$id[edge_list$row.id]
+# edge_list$to <- gemeente_2019$id[edge_list$col.id]
+# edge_list <- subset(edge_list, row.id < col.id)
+# edge_list <- edge_list[,c("from", "to")]
+#
+# g <- igraph::graph_from_data_frame(edge_list, directed = FALSE)
+# plot(g)
+# library(igraph)
+# i <- match(names(V(g)), gemeente_2019$id)
+#
+# c2 <- igraph::layout_with_fr(g, coords[i,])
+# plot(g, layout = c2)
+#
+# buurt_2019 <- st_read("https://cartomap.github.io/nl/rd/buurt_2019.geojson")
+# st_crs(buurt_2019) <- 28992
+# system.time({
+#   nbl <- st_touches(buurt_2019)
+# })
+#
+# coords <- st_coordinates(st_centroid(buurt_2019))
+# l <- lapply(seq_along(nbl), function(i){
+#   nb <- nbl[[i]]
+#   st_sfc(lapply(nb, function(j){
+#     st_linestring(coords[c(i,j),])})
+#   )
+# })
+# l2 <- do.call(c, l)
+#
+# plot(l2)
 }
 \references{
 Suñé, E., Rovira, C., Ibáñez, D., Farré, M. (2017).
@@ -58,7 +108,8 @@ Statistical disclosure control on visualising geocoded population data using
 a structure in quadtrees, NTTS 2017
 }
 \seealso{
-Other protection methods: \code{\link{protect_smooth}},
-  \code{\link{remove_sensitive}}
+Other protection methods: 
+\code{\link{protect_smooth}()},
+\code{\link{remove_sensitive}()}
 }
 \concept{protection methods}

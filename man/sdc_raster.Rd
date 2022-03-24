@@ -4,12 +4,19 @@
 \alias{sdc_raster}
 \title{Create a raster map with privacy awareness}
 \usage{
-sdc_raster(x, variable, r = 200, max_risk = 0.95, min_count = 10,
-  risk_type = c("external", "internal", "discrete"), ...,
-  field = variable)
+sdc_raster(
+  x,
+  variable,
+  r = 200,
+  max_risk = 0.95,
+  min_count = 10,
+  risk_type = c("external", "internal", "discrete"),
+  ...,
+  field = variable
+)
 }
 \arguments{
-\item{x}{\link[sp:SpatialPointsDataFrame]{sp::SpatialPointsDataFrame}, \link[sf:sf]{sf::sf} or a two column matrix or \link{data.frame}
+\item{x}{\link[sp:SpatialPoints]{sp::SpatialPointsDataFrame}, \link[sf:sf]{sf::sf} or a two column matrix or \link{data.frame}
 that is used to create a raster map.}
 
 \item{variable}{name of data column or \code{numeric} with same length as \code{x}
@@ -34,19 +41,18 @@ observations is considered sensitived.}
 \value{
 object of \code{class} "sdc_raster":
 \itemize{
-\item \code{$value}: \code{\link[raster:brick]{raster::brick()}} object with differenct layers e.g. \code{count}, \code{sum}, \code{mean}.
-\item \code{$max_risk}: see above.
-\item \code{$min_count}: see above.
-\item \code{$scale}: used together with \code{min_count} to determine sensitivity: result
+\item \verb{$value}: \code{\link[raster:brick]{raster::brick()}} object with different layers e.g. \code{count}, \code{sum}, \code{mean}, \code{scale}.
+\item \verb{$max_risk}: see above.
+\item \verb{$min_count}: see above.
 of protection operation \code{\link[=protect_smooth]{protect_smooth()}} or \code{\link[=protect_quadtree]{protect_quadtree()}}.
-\item \code{$type}: data type of \code{variable}, either \code{numeric} or \code{logical}
-\item \code{$risk_type}, "external", "internal" or "discrete" (see \code{\link[=disclosure_risk]{disclosure_risk()}})
+\item \verb{$type}: data type of \code{variable}, either \code{numeric} or \code{logical}
+\item \verb{$risk_type}, "external", "internal" or "discrete" (see \code{\link[=disclosure_risk]{disclosure_risk()}})
 }
 }
 \description{
 \code{sdc_raster} creates multiple \code{\link[raster:raster]{raster::raster}} objects
 ("count", "mean", "sum") from supplied point data \code{x} and calculates
-the sensitivity to privacy disclosure for each location.
+the sensitivity to privacy disclosure for each raster location.
 }
 \details{
 A \code{sdc_raster} object is the vehicle that does the book keeping for calculating
@@ -56,9 +62,10 @@ The sensitivity of the map can be assessed with \link{sensitivity_score},
 \code{\link[=plot.sdc_raster]{plot.sdc_raster()}}, \code{\link[=plot_sensitive]{plot_sensitive()}} or \code{print}.
 Reducing the sensitivity can be done with \code{\link[=protect_smooth]{protect_smooth()}},
 \code{\link[=protect_quadtree]{protect_quadtree()}} and \code{\link[=remove_sensitive]{remove_sensitive()}}. Raster maps for \code{mean},
-\code{sum} and \code{count} data can be extracted from the \code{$value} (\code{\link[=brick]{brick()}}).
+\code{sum} and \code{count} data can be extracted from the \verb{$value} (\code{\link[=brick]{brick()}}).
 }
 \examples{
+\donttest{
 library(raster)
 prod <- sdc_raster(enterprises, field = "production", r = 500)
 print(prod)
@@ -74,10 +81,14 @@ summary(prod_mean)
 prod_total <- sum(prod)
 summary(prod_total)
 }
+}
 \seealso{
-Other sensitive: \code{\link{disclosure_risk}},
-  \code{\link{is_sensitive}}, \code{\link{plot_sensitive}},
-  \code{\link{remove_sensitive}},
-  \code{\link{sensitivity_score}}
+Other sensitive: 
+\code{\link{disclosure_risk}()},
+\code{\link{is_sensitive_at}()},
+\code{\link{is_sensitive}()},
+\code{\link{plot_sensitive}()},
+\code{\link{remove_sensitive}()},
+\code{\link{sensitivity_score}()}
 }
 \concept{sensitive}

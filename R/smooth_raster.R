@@ -10,6 +10,8 @@
 #' `smooth_fact`?
 #' @param na.rm should the `NA` value be removed from the raster?
 #' @param pad should the data be padded?
+#' @param padValue what should the padding value be?
+#' @param type what is the type of smoothing (see `raster::focal()`)
 #' @param ... passed through to [`focal`].
 #' @param threshold cells with a lower (weighted) value of this threshold will be removed.
 #' @export
@@ -19,7 +21,9 @@ smooth_raster <- function( x
                          , keep_resolution = TRUE
                          , na.rm           = TRUE
                          , pad             = TRUE
+                         , padValue        = NA
                          , threshold       = NULL
+                         , type            = c("Gauss", "circle", "rectangle")
                          , ...
                          ){
   if (any(bw < raster::res(x))){
@@ -27,10 +31,19 @@ smooth_raster <- function( x
     return(x)
   }
 
-  x <- raster::disaggregate(x, smooth_fact)
+  x_s <- raster::disaggregate(x, smooth_fact)
 
-  w <- raster::focalWeight(x, bw)
-  x_s <- raster::focal(x, w = w, na.rm = na.rm, pad = pad, type="Gaus", ...)
+  type <- match.arg(type)
+  w <- raster::focalWeight(x_s, bw, type = type)
+  x_s$scale <- w[1,1] * x_s$scale
+
+  # loop through the layers in the brick
+  for (n in names(x_s)){
+    if (n %in% c("scale", "mean")){
+      next
+    }
+    x_s[[n]] <- raster::focal(x_s[[n]], w = w, na.rm = na.rm, pad = pad, ...)
+  }
 
   if (isTRUE(keep_resolution)){
     x_s <- raster::aggregate(x_s, fact = smooth_fact, fun=mean)
