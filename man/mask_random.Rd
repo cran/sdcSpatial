@@ -9,7 +9,7 @@ mask_random(x, r, plot = FALSE)
 \arguments{
 \item{x}{coordinates, \code{matrix} or \code{data.frame} (first two columns)}
 
-\item{r}{\code{numeric} maximum pertubation distance (vectorized)}
+\item{r}{\code{numeric} pertubation distance (vectorized)}
 
 \item{plot}{if \code{TRUE} points will be plotted.}
 }
@@ -18,7 +18,7 @@ adapted \code{x} with perturbed coordinates
 }
 \description{
 Pertubates points with a uniform pertubation in a circle.
-Note that \code{r} can either be one distance, of a distance per data point.
+Note that \code{r} can either be one distance, or a distance per data point.
 }
 \examples{
 x <- cbind(
@@ -35,16 +35,18 @@ x_g <- mask_grid(x, r=1, plot=TRUE)
 set.seed(3)
 x_r <- mask_random(x, r=1, plot=TRUE)
 
-if (requireNamespace("FNN", quietly = TRUE)){
-  # weighted random pertubation
-  x_wr <- mask_weighted_random(x, k = 2, r = 4, plot=TRUE)
-}
+\donttest{
+  if (requireNamespace("FNN", quietly = TRUE)){
+    # weighted random pertubation
+    x_wr <- mask_weighted_random(x, k = 2, r = 4, plot=TRUE)
+  }
 
-if ( requireNamespace("FNN", quietly = TRUE)
-  && requireNamespace("sf", quietly = TRUE)
-   ){
-  # voronoi masking, plotting needs package `sf`
-  x_vor <- mask_voronoi(x, r = 1, plot=TRUE)
+  if ( requireNamespace("FNN", quietly = TRUE)
+    && requireNamespace("sf", quietly = TRUE)
+     ){
+    # voronoi masking, plotting needs package `sf`
+    x_vor <- mask_voronoi(x, r = 1, plot=TRUE)
+  }
 }
 }
 \seealso{

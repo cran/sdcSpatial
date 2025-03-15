@@ -11,10 +11,10 @@ create_raster(x, res = 200, ...)
 
 \item{res}{desired resolution (default 200).}
 
-\item{...}{passed through to \code{\link{raster}} function.}
+\item{...}{passed through to \code{\link[raster:raster]{raster::raster()}} function.}
 }
 \value{
-\code{\link[raster:raster]{raster::raster}} object
+\code{\link[raster:raster]{raster::raster()}} object
 }
 \description{
 Utility function to generate a raster at a certain resolution (with rounded coordinates).
